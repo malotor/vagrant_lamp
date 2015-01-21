@@ -8,5 +8,6 @@ class { 'project':
   mysql_db        => 'drupal',
   mysql_user      => 'drupal',
   mysql_pass      => 'drupal01',
-  drush_version   => '7.0.0-alpha8'
+  drush_version   => '7.0.0-alpha8',
+  server_name     => 'vagrantlamp.dev',
 }

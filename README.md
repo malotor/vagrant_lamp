@@ -1,71 +1,76 @@
-vagrantee
+# Vagrant Lamp
 =========
 
-A basic vagrant + puppet setup for PHP development environments, as explained in details on this post:
-http://www.erikaheidi.com/2013/07/10/a-beginners-guide-to-vagrant-and-puppet-part-3-facts-conditionals-modules-and-templates/
+Based in [https://github.com/vagrantee/vagrantee](https://github.com/vagrantee/vagrantee)
 
-It comes with:
+## Install
 
-* Apache
-* PHP 5.4
-* MySQL
-* phpmyadmin
-* composer
+Clone this repo
 
-more customization options are being planned.
-
-Make sure you have both Vagrant and Virtualbox properly installed:
-http://www.erikaheidi.com/2013/07/02/a-begginers-guide-to-vagrant-getting-your-portable-development-environment/
-
-simple usage
-=========
-
-If you just want to test vagrantee, this is the easier way.
-
-<h4>Clone vagrantee repository</h4>
-
-``git clone https://github.com/vagrantee/vagrantee.git``
+``git clone https://github.com/malotor/vagrant_lamp.git`
 
 Init and update the submodules (puppet modules are added as submodules)
 
 ``git submodule init``
 
-
 ``git submodule update``
 
-<h4>Run vagrant</h4>
+Modify project variables from
+
+``/puppet/manifests/default.pp``
+
+``
+	class { 'project':
+	  doc_root        => '/vagrant/web',
+	  mysql_db        => 'drupal',
+	  mysql_user      => 'drupal',
+	  mysql_pass      => 'drupal01',
+	  drush_version   => '7.0.0-alpha8',
+	  server_name     => 'awesome.dev',
+	}
+``
 
 ``vagrant up``
 
-<h4>That's it</h4>
-After the machine is provisioned, go to http://192.168.33.101 in your browser, you shall see a phpinfo() from your VM.
+Your project will be accesible in
 
-<h4>phpmyadmin</h4>
+http://awesome.dev
+
+
+## MySql
+=====
+user: root
+pass: root
+
+Vhost Template
+
+
+
+## phpmyadmin
 =====
 
-phpmyadmin will be available at http://192.168.33.101:8000
+http://awesome.dev:8000
 
-login: root, password: root
-
-usage - as a puppet module
-===========
-
-If you want to use vagrantee in an existent project while maintaining the puppet modules always up-to-date, you can add vagrantee as a git submodule.
-This way you have more flexibility for setting more customizations. Vagrantee itself will manage the other git submodules (puppet modules).
-
-``git submodule add https://github.com/vagrantee/vagrantee``
-
-Then go the vagrantee directory and run
-
-``git submodule init``
+login: root
+password: root
 
 
-``git submodule update``
+## Guest Additions
 
-And all the puppet modules will be initialized.
+If you see a error like this while provisioning the virtual machine
 
-Now copy the Vagrantfile-project.example to your project root folder and rename it for <strong>Vagrantfile</strong>.
-By default, it will use the vagrantee/manifests/default.pp manifest , but you can use your own manifests, just change the path on the Vagrantfile to your own manifests path.
-Then you can set up specific settings by declaring the vagrantee module with some arguments, and also create additional configurations.
+´´
+An error occurred during installation of VirtualBox Guest Additions 4.3.10. Some functionality may not work as intended.
+In most cases it is OK that the "Window System drivers" installation failed.
+´´
+
+You must install vagran plugin "vagrant-vbguest"
+
+´´´vagrant plugin install vagrant-vbguest´´
+
+And then in the guest 
+
+´´vagrant ssh´´
 
 
+´´sudo ln -s /opt/VBoxGuestAdditions-4.3.10/lib/VBoxGuestAdditions /usr/lib/VBoxGuestAdditions´´

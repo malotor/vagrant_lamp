@@ -7,7 +7,8 @@ class project (
   $mysql_user      = 'dbuser',
   $mysql_pass      = 'dbuser01',
   $pma_port        = '80',
-  $drush_version   = '7.0.0-alpha8'
+  $drush_version   = '7.0.0-alpha8',
+  $server_name     = 'awesome.dev'
 ) {
 
   Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ] }
@@ -28,26 +29,27 @@ class project (
   }
 
   package { $sys_packages:
-  ensure => "installed",
-  require => Exec['apt-get update'],
+    ensure => "installed",
+    require => Exec['apt-get update'],
   }
+
   class { "apache": }
 
   apache::module { 'rewrite': }
 
   apache::vhost { 'newcibbva':
     docroot             => $doc_root,
-    server_name         => 'newcibbva.dev',
+    server_name         => $server_name,
     priority            => '',
-    template            => 'vagrantee/apache/vhost.conf.erb',
+    template            => 'project/apache/vhost.conf.erb',
     directory           => $doc_root,
     directory_allow_override   => 'All'
   }
-  apache::vhost { 'newcibbvassl':
+  apache::vhost { "${server_name}ssl":
     docroot             => $doc_root,
-    server_name         => 'newcibbva.dev',
+    server_name         => $server_name,
     priority            => '',
-    template            => 'vagrantee/apache/vhost.conf.erb',
+    template            => 'project/apache/vhost.conf.erb',
     directory           => $doc_root,
     directory_allow_override   => 'All',
     port                 => '443',
@@ -90,7 +92,7 @@ class project (
     port        => '8000',
     priority    => '10',
     require     => Package['phpmyadmin'],
-    template    => 'vagrantee/apache/vhost.conf.erb',
+    template    => 'project/apache/vhost.conf.erb',
   }
 
   class { 'composer':
