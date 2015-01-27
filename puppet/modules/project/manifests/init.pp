@@ -35,9 +35,11 @@ class project (
 
   class { "apache": }
 
+  include apache::ssl
+
   apache::module { 'rewrite': }
 
-  apache::vhost { '${server_name}':
+  apache::vhost { "${server_name}":
     docroot             => $doc_root,
     server_name         => $server_name,
     priority            => '',
