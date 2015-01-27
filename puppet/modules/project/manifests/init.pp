@@ -37,7 +37,7 @@ class project (
 
   apache::module { 'rewrite': }
 
-  apache::vhost { 'newcibbva':
+  apache::vhost { '${server_name}':
     docroot             => $doc_root,
     server_name         => $server_name,
     priority            => '',
@@ -99,8 +99,6 @@ class project (
     require => [ Class[ 'php' ], Package[ 'curl' ] ]
   }
 
-
-
   class { 'dotfiles': }
 
   # Change user
@@ -137,7 +135,5 @@ class project (
   class { 'drush':
     version => $drush_version
   }
-
-  class { 'drupal':}
 
 }
