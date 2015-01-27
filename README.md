@@ -6,41 +6,41 @@ Based in [https://github.com/vagrantee/vagrantee](https://github.com/vagrantee/v
 
 Clone this repo
 
-  $ git clone https://github.com/malotor/vagrant_lamp.git vagrant_lamp
+	$ git clone https://github.com/malotor/vagrant_lamp.git vagrant_lamp
 
 Init and update the submodules (puppet modules are added as submodules)
 
-  $ cd vagrant_lamp
-  $ git submodule init
-  $ git submodule update
+	$ cd vagrant_lamp
+	$ git submodule init
+	$ git submodule update
 
 Modify project variables from
 
-  /puppet/manifests/default.pp
-
-
+	/puppet/manifests/default.pp
+	
+	
 	class { 'project':
-	  doc_root        => '/vagrant/web',
-	  mysql_db        => 'drupal',
-	  mysql_user      => 'drupal',
-	  mysql_pass      => 'drupal01',
-	  drush_version   => '7.0.0-alpha8',
-	  server_name     => 'awesome.dev',
+		doc_root        => '/vagrant/web',
+		mysql_db        => 'drupal',
+		mysql_user      => 'drupal',
+		mysql_pass      => 'drupal01',
+		drush_version   => '7.0.0-alpha8',
+		server_name     => 'awesome.dev',
 	}
 
 
 Modify your /etc/hosts files
 
-  192.168.33.101 awesome.dev
+	192.168.33.101 awesome.dev
 
 Up vagrant
 
-  $ vagrant up
+	$ vagrant up
 
 
 Your project will be accesible in
 
-  http://awesome.dev
+	http://awesome.dev
 
 
 ## MySql
@@ -68,8 +68,8 @@ In most cases it is OK that the "Window System drivers" installation failed.
 
 You must install vagran plugin "vagrant-vbguest" in host
 
-  vagrant plugin install vagrant-vbguest
+	vagrant plugin install vagrant-vbguest
 
 And then in the guest 
 
-  sudo ln -s /opt/VBoxGuestAdditions-4.3.10/lib/VBoxGuestAdditions /usr/lib/VBoxGuestAdditions
+	sudo ln -s /opt/VBoxGuestAdditions-4.3.10/lib/VBoxGuestAdditions /usr/lib/VBoxGuestAdditions
