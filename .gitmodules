@@ -25,3 +25,12 @@
 [submodule "puppet/modules/dotfiles/files"]
 	path = puppet/modules/dotfiles/files
 	url = https://github.com/malotor/dot_files.git
+[submodule "puppet/modules/ruby"]
+	path = puppet/modules/ruby
+	url = https://github.com/puppetlabs/puppetlabs-ruby
+[submodule "puppet/modules/puppet-bundler"]
+	path = puppet/modules/puppet-bundler
+	url = https://github.com/puppetlabs-operations/puppet-bundler.git
+[submodule "puppet/modules/bundler"]
+	path = puppet/modules/bundler
+	url = https://github.com/puppetlabs-operations/puppet-bundler.git

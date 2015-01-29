@@ -6,6 +6,6 @@ class dotfiles (
   file { "/home/vagrant":
     source  => "puppet:///modules/dotfiles/",
     recurse => true,
-    mode => 0770,
+    mode => 0775,
   }
 }
