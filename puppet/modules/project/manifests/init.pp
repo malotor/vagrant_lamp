@@ -65,7 +65,7 @@ class project (
   php::module { $php_modules: }
 
     php::ini { 'php':
-    value   => ['date.timezone = "UTC"','upload_max_filesize = 8M', 'short_open_tag = 0'],
+    value   => ['date.timezone = "UTC"','upload_max_filesize = 8M', 'short_open_tag = 0' ,'memory_limit = 300', 'max_execution_time = 180'],
     target  => 'php.ini',
     service => 'apache',
   }
