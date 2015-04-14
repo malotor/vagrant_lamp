@@ -6,6 +6,12 @@ Vagrant.configure("2") do |config|
     config.vm.network :private_network, ip: "192.168.33.101"
 
     config.vm.synced_folder "../", "/vagrant", id: "vagrant-root"
+    
+    config.vm.provider "virtualbox" do |v|
+      v.memory = 1024
+      v.cpus = 1
+    end
+
 
     config.vm.provision :puppet do |puppet|
         puppet.manifests_path = "puppet/manifests"
