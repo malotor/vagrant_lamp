@@ -143,22 +143,10 @@ class project (
     version         => '1.9.2',
     gems_version  => 'latest'
   }
-  /*
-  class { 'ruby':
-      version         => '1.8.7',
-      gems_version    => '1.8.24',
-      rubygems_update => false
-    }
-  */
+  
 
   bundler::install { "${doc_root}/profiles/cibbva/themes/cibbva_frontend":
     require     => Class['ruby'],
   }
-/*
- bundler::install { "${doc_root}/profiles/cibbva/themes/front_end":
-    user       => $app_user,
-    group      => $app_group,
-    deployment => true,
-    without    => 'development test doc',
-  }*/
+
 }
